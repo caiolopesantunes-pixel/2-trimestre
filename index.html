@@ -97,16 +97,18 @@
             cursor: pointer;
             border-radius: 2px;
             font-family: Arial, sans-serif;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
 
         .btn-reaction:hover {
             background-color: #e5e5e5;
         }
         
-        /* Efeito visual simples quando o botão for clicado */
-        .btn-reaction:active {
-            background-color: #d8d8d8;
+        /* Estilo visual para quando o botão estiver ATIVADO (curtido) */
+        .btn-reaction.active {
+            background-color: #e1ecf4;
+            border-color: #7aa7c7;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -128,8 +130,8 @@
                     Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.
                 </p>
                 <div class="reactions">
-                    <button class="btn-reaction" onclick="computarClique(this)">💖 <span>0</span></button>
-                    <button class="btn-reaction" onclick="computarClique(this)">👍 <span>1</span></button>
+                    <button class="btn-reaction" onclick="alternarCurtida(this)">💖 <span>0</span></button>
+                    <button class="btn-reaction" onclick="alternarCurtida(this)">👍 <span>1</span></button>
                 </div>
             </div>
         </article>
@@ -143,8 +145,8 @@
                     Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.
                 </p>
                 <div class="reactions">
-                    <button class="btn-reaction" onclick="computarClique(this)">💖 <span>0</span></button>
-                    <button class="btn-reaction" onclick="computarClique(this)">👍 <span>0</span></button>
+                    <button class="btn-reaction" onclick="alternarCurtida(this)">💖 <span>0</span></button>
+                    <button class="btn-reaction" onclick="alternarCurtida(this)">👍 <span>0</span></button>
                 </div>
             </div>
         </article>
@@ -152,13 +154,21 @@
     </div>
 
     <script>
-        function computarClique(botao) {
-            // Seleciona a tag <span> que está dentro do botão clicado
-            const contadorContador = botao.querySelector('span');
+        function alternarCurtida(botao) {
+            // Seleciona o número dentro do botão
+            const tagContador = botao.querySelector('span');
+            let contagemAtual = parseInt(tagContador.innerText);
             
-            // Pega o número atual, transforma em texto e soma + 1
-            let contagemAtual = parseInt(contadorContador.innerText);
-            contadorContador.innerText = contagemAtual + 1;
+            // Verifica se o botão já tem a classe 'active' (se já foi clicado antes)
+            if (botao.classList.contains('active')) {
+                // Se já estava ativo, o usuário está "descurtindo": remove a classe e subtrai 1
+                botao.classList.remove('active');
+                tagContador.innerText = contagemAtual - 1;
+            } else {
+                // Se não estava ativo, o usuário está "curtindo": adiciona a classe e soma 1
+                botao.classList.add('active');
+                tagContador.innerText = contagemAtual + 1;
+            }
         }
     </script>
 
