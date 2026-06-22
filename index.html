@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Times New Roman', Times, serif; /* Fonte serifada igual à da imagem */
+            font-family: 'Times New Roman', Times, serif;
         }
 
         body {
@@ -20,7 +20,7 @@
 
         /* Cabeçalho (Header) */
         header {
-            background-color: #1a4373; /* Azul escuro do cabeçalho */
+            background-color: #1a4373;
             color: #ffffff;
             text-align: center;
             padding: 40px 20px;
@@ -53,7 +53,7 @@
 
         /* Ícone do Post */
         .post-icon {
-            font-size: 3rem; /* Tamanho do emoji/ícone */
+            font-size: 3rem;
             margin-right: 20px;
             margin-top: 5px;
             user-select: none;
@@ -96,11 +96,17 @@
             font-size: 0.9rem;
             cursor: pointer;
             border-radius: 2px;
-            font-family: Arial, sans-serif; /* Fonte dos botões é mais limpa */
+            font-family: Arial, sans-serif;
+            transition: background 0.2s;
         }
 
         .btn-reaction:hover {
-            background-color: orange;
+            background-color: #e5e5e5;
+        }
+        
+        /* Efeito visual simples quando o botão for clicado */
+        .btn-reaction:active {
+            background-color: #d8d8d8;
         }
     </style>
 </head>
@@ -122,8 +128,8 @@
                     Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.
                 </p>
                 <div class="reactions">
-                    <button class="btn-reaction">💖 <span>0</span></button>
-                    <button class="btn-reaction">👍 <span>1</span></button>
+                    <button class="btn-reaction" onclick="computarClique(this)">💖 <span>0</span></button>
+                    <button class="btn-reaction" onclick="computarClique(this)">👍 <span>1</span></button>
                 </div>
             </div>
         </article>
@@ -137,13 +143,24 @@
                     Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.
                 </p>
                 <div class="reactions">
-                    <button class="btn-reaction">💖 <span>0</span></button>
-                    <button class="btn-reaction">👍 <span>0</span></button>
+                    <button class="btn-reaction" onclick="computarClique(this)">💖 <span>0</span></button>
+                    <button class="btn-reaction" onclick="computarClique(this)">👍 <span>0</span></button>
                 </div>
             </div>
         </article>
 
     </div>
+
+    <script>
+        function computarClique(botao) {
+            // Seleciona a tag <span> que está dentro do botão clicado
+            const contadorContador = botao.querySelector('span');
+            
+            // Pega o número atual, transforma em texto e soma + 1
+            let contagemAtual = parseInt(contadorContador.innerText);
+            contadorContador.innerText = contagemAtual + 1;
+        }
+    </script>
 
 </body>
 </html>
